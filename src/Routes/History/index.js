@@ -10,19 +10,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const useStyles = makeStyles((theme) => ({
-  mainContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    marginTop: "4rem",
-    alignItems: "center",
-  },
-  listContainer: {
-    width: "75%",
-  },
-}));
-
 const History = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -80,4 +67,16 @@ const History = () => {
     </div>
   );
 };
+const useStyles = makeStyles((theme) => ({
+  mainContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginTop: "4rem",
+    alignItems: "center",
+  },
+  listContainer: {
+    width: "75%",
+  },
+}));
 export default History;

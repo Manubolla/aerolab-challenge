@@ -27,7 +27,7 @@ export const getUser = () => async (dispatch) => {
     dispatch({ type: GET_USER, payload: user.data });
   }
 };
-export const redeemProduct = (productId, amount) => async(dispatch) => {
+export const redeemProduct = (productId, amount) => async (dispatch) => {
   const redeem = await axios.post(
     "https://coding-challenge-api.aerolab.co/redeem",
     { productId },
@@ -38,11 +38,11 @@ export const redeemProduct = (productId, amount) => async(dispatch) => {
     }
   );
   if (redeem) {
-    dispatch({type: UPDATE_COINS, payload: amount, operator: "substract"})
+    dispatch({ type: UPDATE_COINS, payload: amount, operator: "substract" });
     alert("Nice!");
   }
 };
-export const addCoins = () => async(dispatch) => {
+export const addCoins = () => async (dispatch) => {
   const points = await axios.post(
     "https://coding-challenge-api.aerolab.co/user/points",
     { amount: 5000 },
@@ -53,7 +53,7 @@ export const addCoins = () => async(dispatch) => {
     }
   );
   if (points) {
-    dispatch({type: UPDATE_COINS, payload: 5000, operator: "sum"})
-    alert('5000 coins added!')
+    dispatch({ type: UPDATE_COINS, payload: 5000, operator: "sum" });
+    alert("5000 coins added!");
   }
 };

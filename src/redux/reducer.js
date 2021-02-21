@@ -1,4 +1,3 @@
-import { ContactSupportOutlined } from "@material-ui/icons";
 import { GET_USER, GET_PRODUCTS, UPDATE_COINS } from "./constants";
 const initialState = {
   user: [],
@@ -19,7 +18,6 @@ const rootReducer = (state = initialState, action) => {
         products: action.payload,
       };
     case UPDATE_COINS:
-      console.log(action.operator)
       return {
         ...state,
         user: (action.operator === 'sum' ? {...state.user, points: state.user.points + action.payload} : {...state.user, points: state.user.points - action.payload})

@@ -6,9 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import buyBlue from "../../assets/icons/buy-blue.svg";
 import coin from "../../assets/icons/coin.svg";
-/* import { TOKEN } from "../../redux/constants"; */
 import { redeemProduct } from "../../redux/actions";
-/* import axios from "axios"; */
 import { useDispatch } from "react-redux";
 import { Divider } from "@material-ui/core";
 

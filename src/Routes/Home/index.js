@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import header from "../../assets/header-x1.png";
-import TopBar from "../../components/TopBar";
 import ProductCard from "../../components/ProductCard";
 import { getProducts, getUser } from "../../redux/actions";
 import PaginationBar from "../../components/PaginationBar";
@@ -25,8 +24,6 @@ function Home() {
   }, [dispatch, products]);
 
   return (
-   /*  <div>
-      <TopBar user={user} /> */
       <>
       <div className={classes.header}>
         <img src={header} alt="header" width="100%" />
@@ -56,7 +53,6 @@ function Home() {
         />
       </div>
       </>
-    /* </div> */
   );
 }
 

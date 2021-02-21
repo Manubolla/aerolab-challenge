@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import logo from "../../assets/aerolab-logo.svg";
@@ -23,7 +22,6 @@ const TopBar = () => {
       <AppBar position="fixed" color="default">
         <Toolbar className={classes.toolbar}>
            <Link to='/'> <img src={logo} alt="logo" /></Link>
-          {/* <Link to="/history">History</Link> */}
           <div className={classes.userToolbar}>
             <Tooltip title="Get 5000 coins">
               <button className={classes.coinToolbar} onClick={() => dispatch(addCoins())}> 

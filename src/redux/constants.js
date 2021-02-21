@@ -1,0 +1,5 @@
+export const TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMxMTk4OTdlNzE4NzAwMjBlMzhmMDYiLCJpYXQiOjE2MTM4MzA1Mzd9.Wln58d-pWhpjAfbuPvZqORDKY83e559I4R_qZi1nvRs";
+export const GET_USER = "GET_USER";
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const UPDATE_COINS ='UPDATE_COINS';

@@ -44,7 +44,7 @@ const PaginationBar = (props) => {
           } products`}
       </p>
       {props.filter && (
-        <div>
+        <div className={classes.groupButtons}>
           Sort By:
           <FilterButton
             text="Most Recent"
@@ -98,12 +98,21 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "75%",
+    [theme.breakpoints.down('sm')]: {
+      width: '90%',
+      flexDirection: 'column'
+      
+    }
   },
   arrowButtons: {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "right",
     width: "25%",
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      justifyContent: "center"
+    }
   },
   products: {
     fontFamily: "SourceSansPro-Regular",
@@ -112,6 +121,15 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "-0.15px",
     lineHeight: "24px",
     textAlign: "left",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '14px',
+      lineHeight: "14px"
+    }
   },
+  groupButtons:{
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '12px',
+    }
+  }
 }));
 export default PaginationBar;

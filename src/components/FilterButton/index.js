@@ -21,7 +21,7 @@ const FilterButton = (props) => {
     </Button>
   );
 };
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   filterButton: {
     borderRadius: "1rem",
     margin: ".5rem",
@@ -30,6 +30,10 @@ const useStyles = makeStyles({
     letterSpacing: "-0.15px",
     lineHeight: "24px",
     textAlign: "left",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: "10px",
+      lineHeight: "16px"
+    }
   },
-});
+}));
 export default FilterButton;

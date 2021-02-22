@@ -67,8 +67,7 @@ const History = () => {
     <div className={classes.mainContainer}>
       <h1 className={classes.title}>Purchase History</h1>
       <div className={classes.listContainer}>
-        <div>
-          Sort By:
+        <div className={classes.groupButtons}>
           <FilterButton
             text="Older purchase"
             type="older"
@@ -150,5 +149,12 @@ const useStyles = makeStyles((theme) => ({
   listContainer: {
     width: "75%",
   },
+  groupButtons:{
+    [theme.breakpoints.down('sm')]: {
+      display: "grid",
+      gridTemplateColumns: "repeat(2,1fr)",
+      alignItems: "center"
+    }
+  }
 }));
 export default History;

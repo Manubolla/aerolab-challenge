@@ -19,7 +19,7 @@ const TopBar = () => {
 
   return (
     <>
-      <AppBar position="fixed" color="default">
+      <AppBar position="fixed" color="default" className={classes.topBar}>
         <Toolbar className={classes.toolbar}>
            <Link to='/'> <img src={logo} alt="logo" /></Link>
           <div className={classes.userToolbar}>
@@ -50,7 +50,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     width: "20%",
-    
+    [theme.breakpoints.down('sm')]: {
+      width: "60%"
+    }
   },
   coinToolbar: {
     display: "flex",

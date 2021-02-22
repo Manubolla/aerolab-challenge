@@ -74,22 +74,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-evenly",
     width: "100%",
-  },
-  filterButton: {
-    borderRadius: "1rem",
-    margin: ".5rem",
-    fontSize: "12px",
-    color: "#ffffff",
-    letterSpacing: "-0.15px",
-    lineHeight: "24px",
-    textAlign: "left",
-  },
+  },    
   productsContainer: {
     display: "grid",
     gridTemplateColumns: "repeat(4,1fr)",
     gridColumnGap: "15px",
     gridRowGap: "15px",
     marginTop: "2rem",
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: "repeat(2,1fr)",
+    }
   },
   mainContent: {
     display: "flex",
@@ -112,5 +106,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "24px",
     textAlign: "left",
   },
+  header: {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '4rem'
+    }
+  }
 }));
 export default Home;

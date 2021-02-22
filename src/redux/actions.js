@@ -1,5 +1,6 @@
 import { GET_USER, GET_PRODUCTS, UPDATE_COINS, TOKEN } from "./constants";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const getProducts = () => async (dispatch) => {
   const products = await axios.get(
@@ -39,7 +40,6 @@ export const redeemProduct = (productId, amount) => async (dispatch) => {
   );
   if (redeem) {
     dispatch({ type: UPDATE_COINS, payload: amount, operator: "substract" });
-    alert("Nice!");
   }
 };
 export const addCoins = () => async (dispatch) => {
@@ -54,6 +54,6 @@ export const addCoins = () => async (dispatch) => {
   );
   if (points) {
     dispatch({ type: UPDATE_COINS, payload: 5000, operator: "sum" });
-    alert("5000 coins added!");
+    swal("", '5000 coin have been added to your account!',"success")
   }
 };

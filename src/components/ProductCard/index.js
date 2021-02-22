@@ -9,6 +9,7 @@ import coin from "../../assets/icons/coin.svg";
 import { redeemProduct } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { Divider } from "@material-ui/core";
+import swal from "sweetalert";
 
 const ProductCard = ({ data, userCoins }) => {
   const classes = useStyles();
@@ -17,7 +18,23 @@ const ProductCard = ({ data, userCoins }) => {
 
   const handleRedeem = () => {
     if(userCoins > data.cost) {
-      dispatch(redeemProduct(data._id, data.cost));
+      swal("Are you sure you want to redeem this product?", {
+        buttons: {
+          cancel: "No",
+          accept: "Yes",
+        },
+      })
+      .then((value) => {
+        switch(value) {
+          case "accept":
+            swal('The product is now yours!', "", "success")
+            dispatch(redeemProduct(data._id, data.cost));
+            break;
+          case 'cancel':
+            break
+          default:  break;
+        }
+      })
     } else {
       alert('You cant buy this!')
     }

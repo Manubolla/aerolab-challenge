@@ -53,9 +53,9 @@ const ProductCard = ({ data, userCoins }) => {
       <div className={classes.imageContainer}>
         <img
           className={classes.cardMedia}
-          alt="Contemplative Reptile"
+          alt={data.name}
           src={data.img.url}
-          title="Contemplative Reptile"
+          title={data.name}
         />
         <Divider variant="middle" />
         <div>
@@ -102,26 +102,30 @@ const ProductCard = ({ data, userCoins }) => {
       </div>
       
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary" component="p" className={classes.cardContent}>
           {data.category}
         </Typography>
-        <Typography gutterBottom variant="body1" component="p">
+        <Typography gutterBottom variant="body1" component="p" className={classes.cardContent}>
           {data.name}
         </Typography>
       </CardContent>
     </Card>
   );
 };
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     maxHeight: 300,
     position: "relative",
+    [theme.breakpoints.down('sm')]: {
+      width: "85%",
+      height: "85%"
+    }
   },
   cardMedia: {
     padding: "0",
     width: "70%",
-    margin: '1rem'
+    margin: '1rem',
   },
   imageContainer: {
     textAlign: "center",
@@ -160,6 +164,7 @@ const useStyles = makeStyles({
     width: "75%",
     color: "#fff",
     fontSize: "24px",
+    
   },
   redeemButton: {
     background: "white",
@@ -173,6 +178,10 @@ const useStyles = makeStyles({
     "&:hover": {
       background: "white",
     },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '13px',
+      color: 'black'
+    }
   },
   coinsRedeem: {
     display: "flex",
@@ -189,5 +198,11 @@ const useStyles = makeStyles({
     fontSize: "10px",
     color: "#fff",
   },
-});
+  cardContent: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '13px',
+      paddingBottom: '.5rem',
+    }
+  }
+}));
 export default ProductCard;

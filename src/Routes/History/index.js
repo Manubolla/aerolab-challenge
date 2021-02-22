@@ -10,16 +10,20 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import FilterButton from "../../components/FilterButton";
+import { TablePagination } from "@material-ui/core";
 
 const History = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [rows, setRows] = React.useState([]);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(0);
   const [activeButton, setActiveButton] = React.useState({
     older: true,
     name: "oldest",
   });
+  const rowsRef = React.useRef([]);
 
   const createData = (name, category, cost, date, id) => ({
     name,
@@ -28,38 +32,53 @@ const History = () => {
     date: date.split("T")[0],
     id,
   });
-  const handleRows = (type) => {
+  const handleRows = (type, pagina) => {
+    let products = [...rowsRef.current];
+    let firstIdx = rowsPerPage * (pagina === undefined ? 0 : pagina )
+    let secondIdx = rowsPerPage * (pagina === undefined ? 1 : pagina + 1)
     switch (type) {
       case "older":
-        setRows((oldRows) => oldRows.sort((a, b) => (new Date(a.date) - new Date(b.date))));
+        products.sort((a, b) => new Date(a.date) - new Date(b.date));
         break;
       case "newer":
-        setRows((oldRows) => oldRows.sort((a, b) => (new Date(b.date) - new Date(a.date))));
+        products.sort((a, b) => new Date(b.date) - new Date(a.date));
         break;
       case "highest":
-        setRows((oldRows) => oldRows.sort((a, b) => b.cost - a.cost));
+        products.sort((a, b) => b.cost - a.cost);
         break;
       case "lowest":
-        setRows((oldRows) => oldRows.sort((a, b) => a.cost - b.cost));
+        products.sort((a, b) => a.cost - b.cost);
         break;
       default:
         return rows;
     }
+    setRows(products.slice(firstIdx, secondIdx));
+    if(pagina === undefined) setPage(0)
+  };
+  const handleChangePage = (event, newPage) => {
+    console.log(newPage)
+    setPage(newPage);
+    return handleRows(activeButton.name, newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
   React.useEffect(() => {
     dispatch(getUser());
     if (user && Object.keys(rows).length === 0) {
-      user &&
-        user.redeemHistory.map((item) => {
-          const data = createData(
-            item.name,
-            item.category,
-            item.cost,
-            item.createDate,
-            item._id
-          );
-          return setRows((oldRows) => [...oldRows, data]);
-        });
+      const newData = user.redeemHistory.map((item) =>
+        createData(
+          item.name,
+          item.category,
+          item.cost,
+          item.createDate,
+          item._id
+        )
+      );
+      setRows((oldRows) => [...newData].slice(0, rowsPerPage));
+      rowsRef.current = newData;
     }
   }, []);
 
@@ -121,19 +140,30 @@ const History = () => {
             </TableHead>
             <TableBody>
               {rows &&
-                rows.map((row) => (
-                  <TableRow key={parseInt(row.id) * Math.random()}>
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.category}</TableCell>
-                    <TableCell align="right">{row.cost}</TableCell>
-                    <TableCell align="right">{row.date}</TableCell>
-                  </TableRow>
-                ))}
+                rows.map((row) => {
+                  return (
+                    <TableRow key={parseInt(row.id) * Math.random()}>
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.category}</TableCell>
+                      <TableCell align="right">{row.cost}</TableCell>
+                      <TableCell align="right">{row.date}</TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rowsRef.current.length ? rowsRef.current.length : 1 }
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </div>
     </div>
   );
@@ -149,12 +179,12 @@ const useStyles = makeStyles((theme) => ({
   listContainer: {
     width: "75%",
   },
-  groupButtons:{
-    [theme.breakpoints.down('sm')]: {
+  groupButtons: {
+    [theme.breakpoints.down("sm")]: {
       display: "grid",
       gridTemplateColumns: "repeat(2,1fr)",
-      alignItems: "center"
-    }
-  }
+      alignItems: "center",
+    },
+  },
 }));
 export default History;

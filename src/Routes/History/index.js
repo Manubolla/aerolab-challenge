@@ -99,7 +99,7 @@ const History = () => {
             setState={setRows}
             activeButton={activeButton}
             setActiveButton={setActiveButton}
-            pagination={handleRows}
+            filterProducts={handleRows}
           />
           <FilterButton
             text="Newer purchase"
@@ -108,7 +108,7 @@ const History = () => {
             setState={setRows}
             activeButton={activeButton}
             setActiveButton={setActiveButton}
-            pagination={handleRows}
+            filterProducts={handleRows}
           />
           <FilterButton
             text="Highest price"
@@ -117,7 +117,7 @@ const History = () => {
             setState={setRows}
             activeButton={activeButton}
             setActiveButton={setActiveButton}
-            pagination={handleRows}
+            filterProducts={handleRows}
           />
           <FilterButton
             text="Lowest price"
@@ -126,7 +126,7 @@ const History = () => {
             setState={setRows}
             activeButton={activeButton}
             setActiveButton={setActiveButton}
-            pagination={handleRows}
+            filterProducts={handleRows}
           />
         </div>
         <TableContainer component={Paper}>

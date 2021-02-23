@@ -7,7 +7,7 @@ const FilterButton = (props) => {
 
   const handleFilter = (type) => {
     props.setActiveButton({ [type]: true, name: type });
-    return props.pagination(type);
+    return props.filterProducts(type);
   };
   return (
     <Button

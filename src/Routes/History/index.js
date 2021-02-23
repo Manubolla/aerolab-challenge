@@ -34,8 +34,8 @@ const History = () => {
   });
   const handleRows = (type, pagina) => {
     let products = [...rowsRef.current];
-    let firstIdx = rowsPerPage * (pagina === undefined ? 0 : pagina )
-    let secondIdx = rowsPerPage * (pagina === undefined ? 1 : pagina + 1)
+    let firstIdx = rowsPerPage * (pagina === undefined ? 0 : pagina);
+    let secondIdx = rowsPerPage * (pagina === undefined ? 1 : pagina + 1);
     switch (type) {
       case "older":
         products.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -53,7 +53,7 @@ const History = () => {
         return rows;
     }
     setRows(products.slice(firstIdx, secondIdx));
-    if(pagina === undefined) setPage(0)
+    if (pagina === undefined) setPage(0);
   };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -64,9 +64,15 @@ const History = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  /* When the history page render */
   React.useEffect(() => {
     dispatch(getUser());
-    if (user && Object.keys(rows).length === 0) {
+  }, [dispatch]);
+  
+  /* To update the list, any other way to do this? */
+  React.useEffect(() => {
+    if (user) {
       const newData = user.redeemHistory.map((item) =>
         createData(
           item.name,
@@ -79,7 +85,7 @@ const History = () => {
       setRows((oldRows) => [...newData].slice(0, rowsPerPage));
       rowsRef.current = newData;
     }
-  }, []);
+  }, [user, rowsPerPage]);
 
   return (
     <div className={classes.mainContainer}>
@@ -157,7 +163,7 @@ const History = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rowsRef.current.length ? rowsRef.current.length : 1 }
+          count={rowsRef.current.length ? rowsRef.current.length : 1}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

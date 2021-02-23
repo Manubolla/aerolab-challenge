@@ -21,7 +21,7 @@ const History = () => {
   const [page, setPage] = React.useState(0);
   const [activeButton, setActiveButton] = React.useState({
     older: true,
-    name: "oldest",
+    name: "older",
   });
   const rowsRef = React.useRef([]);
 
@@ -56,7 +56,6 @@ const History = () => {
     if(pagina === undefined) setPage(0)
   };
   const handleChangePage = (event, newPage) => {
-    console.log(newPage)
     setPage(newPage);
     return handleRows(activeButton.name, newPage);
   };
